@@ -11,7 +11,7 @@ if (isset($_POST["submit"])) {
 
 require_once 'databasehandler-inc.php'; //on se connecte à la base de données
 
-require_once 'functions.php'; //on fait appel à diférentes fonctions qu'on va utiliser ci-dessous
+require_once 'functions-inc.php'; //on fait appel à diférentes fonctions qu'on va utiliser ci-dessous
 
 if (emptyInputSignup($name, $email, $username, $password1, $password2) !== false ){
     header("location: ../signin.php?error=emptyinput"); //si un des champs est vide, le user est renvoyé à la page 'signin" et on passe une info sur l'erreur dans l'url
@@ -29,7 +29,7 @@ if (pwdMatch($password1, $password2) !== false ){
     header("location: ../signin.php?error=passwordsdontmatch"); // si les mots de passe sont différents, le user est renvoyé à la page 'signin" et on passe une info sur l'erreur dans l'url
     exit(); 
 }
-if (uidExists($conn, $username) !== false ){
+if (uidExists($conn, $username, $email) !== false ){
     header("location: ../signin.php?error=usernametaken"); // si le username existe déjà, le user est renvoyé à la page 'signin" et on passe une info sur l'erreur dans l'url
     exit(); 
 }
